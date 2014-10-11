@@ -1,0 +1,114 @@
+Name : Anish Narian
+CSid: cs30xke
+PID: A98071125
+Email: anarsian@ucsd.edu
+Date: October 16 2013
+
+High Level Description : 
+  We wrote a total of 6 files as well as tester.
+  The files include:
+  1. checkRange.s which is an assembly file
+     to check if a file is in range based
+     on arguments for lower and higher
+  2. displayDiamond.s which is an assembly
+     file to print out(using printChar) outer
+     and inner characters using loops
+  3. printChar.s which calls print
+  4. isOdd.s which checks that width and
+     height of the Diamond is odd
+  5. strToLong.c which is a c file to convert
+     string to long using strtol
+  6. main.c which prints out error messages as
+     well as prints the diamond
+  These files basically display a diamond based
+  on height width and ascii values of inner and 
+  outer characters to print.
+
+How to Compile it :
+  The Makefile is provided. We run "make" on 
+  the command prompt.
+
+Normal Output : 
+  The normal output goes in the stdout
+  
+  An Exapmle:
+ [cs30xdc@ieng9]: ./pa1 11 9 42 57 
+ *********** 
+ *****9***** 
+ ****999**** 
+ ***99999*** 
+ **9999999** 
+ *999999999* 
+ **9999999** 
+ ***99999*** 
+ ****999**** 
+ *****9***** 
+ *********** 
+
+ 
+Abnormal Output: Abnormal output goes to
+		 stderr
+		
+		An example:
+[cs30xdc@ieng9]:pa1:573$ ./pa1
+ Usage: ./pa1 width height border_ch diamond_ch 
+    width        (must be odd within the range of [3 - 21]) 
+    height       (must be odd within the range of [1 - 19]) 
+                 (must be less than width) 
+    border_ch    (must be an ASCII value within the range [33 - 126]) 
+                 (must be different than diamond_ch) 
+    diamond_ch   (must be an ASCII value within the range [33 - 126]) 
+                 (must be different than border_ch) 
+ 
+
+
+How I Tested It:
+  Used testers for testStrToLong, testisOdd, testCheckRange,
+  also compared to desired outcome from pdf and pa1test.
+  Used .diff command to check the difference between the output.
+  
+  The .diff command was used for both normal and abnormal output for example:
+ieng9: ./pa1 11 9 42 57 &> A
+ieng9: ./pa1test 11 9 42 57 &> AB
+ieng9: diff -c A AB
+No Differences encountered
+
+ieng9: ./pa1 -2 0 5 5 &> A
+ieng9: ./pa1test -2 0 5 5 &> AB
+ieng9: diff -c A AB
+No Differences encountered
+
+ieng9: ./pa1 -2 0 5 5 &> A
+
+   width(-2) must be within the range of [3 - 21] 
+ 
+   width(-2) must be an odd number. 
+ 
+   height(0) must be within the range of [1 - 19] 
+ 
+   height(0) must be an odd number. 
+ 
+   height(0) must be less than width(-2) 
+ 
+   border_ch(5) must be an ASCII code in the range [33 - 126] 
+ 
+   diamond_ch(5) must be an ASCII code in the range [33 - 126] 
+ 
+   border_ch(5) and diamond_ch(5) must be different
+
+
+
+Answers to some questions:
+1. Enter p followed by str in gdb to print the value
+   of this argument as "9InchNails"[gdb: p str]
+2. Enter p/d base[gdb: p/d base]
+3. Enter p/a &endptr to print hex address
+4. There are two ways to print value returned by strtol
+   a. Enter p num
+   b. Enter p$o0 to print the value
+   The answer is 9 in both cases
+5. Enter p/c *endptr or p *endptr
+7. enter p errno
+8. git status
+9. Use git reset HEAD --hard and then git clean -fd
+10.Use git diff filename
