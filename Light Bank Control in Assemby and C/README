@@ -1,0 +1,134 @@
+Name : Anish Narian
+CSid: cs30xke
+PID: A98071125
+Email: anarsian@ucsd.edu
+Date: October 30 2013
+
+High Level Description:
+This is a program to control two banks of lights with 32 each. It can
+be used to set, toggle, clear, shift, rotate ripple the lights. 
+
+It does it using 10 files including: 
+
+1.  strToULong.s 
+    unsigned long strToULong(const char* str, const int base); 
+    Converts a STring to Long 
+2. displayLights.s 
+   void displayLights(const unsigned int lightBank[]); 
+   This function displays the light banks. '*' 
+   indicates the light is on; '-' indicates the light is off. 
+   Cycle through the 2 banks of lights using your printChar() 
+3  set.s 
+   void set(unsigned int lightBank[], 
+                const unsigned int bank0, const unsigned int bank1); 
+   This function sets the lights based on which 
+   bits are set in the bit patterns specified. bank0 represents the first 
+   32 lights (bits). bank1 represents the second 32 lights (bits).  
+4. clear.s 
+   void clear(unsigned int lightBank[], 
+              const unsigned int bank0, const unsigned int bank1); 
+   This function clears the lights based on which bits are set in the 
+   bit patterns specified. bank0 represents the first 32 lights (bits). 
+   bank1 represents the second 32 lights (bits). 
+
+5  toggle.s 
+   void toggle(unsigned int lightBank[], 
+            const unsigned int bank0, const unsigned int bank1); 
+   This function toggles the lights based on which bits are 
+   set in the bit patterns specified. bank0 represents the  
+   first 32 lights (bits). bank1 represents the second 32 lights (bits). 
+   You cannot use bset, bclr, or btog. 
+ 
+6. shift.s 
+   void shift(unsigned int lightBank[], const int shiftCnt); 
+   This function shifts the current light patterns in the 
+   light banks by shiftCnt places. If the shiftCnt is positive, 
+   shift left; if the shiftCnt is negative, shift right. 
+   Only the lower 6 bits of the shiftCnt should be used for the 
+   shiftCnt. 
+ 
+7. rotate.s 
+   void rotate(unsigned int lightBank[], const int rotateCnt); 
+   This function rotates the current light patterns in the light
+   banks by rotateCnt places. If the rotateCnt is positive, rotate left;
+   if the rotateCnt is negative, rotate right. 
+   Only the lower 6 bits of the rotateCnt should be used for the rotateCnt. 
+ 
+8.  ripple.s 
+    void ripple(unsigned int lightBank[], const int rippleCnt); 
+    This function rotates the current light patterns in 
+    the light banks by rippleCnt places displaying the light banks 
+    after each single bit rotate. If the rippleCnt is positive, rotate left;
+     if the rippleCnt is negative, rotateright. The rippleCnt may be
+     of any valid int value. Call displayLights() after each
+     single bit rotate giving the ripple effect. 
+ 
+9  printChar.s 
+   void printChar(const char ch)
+   It prints the character
+
+As well as two C files:
+
+10. main.c: This puts all the files together and prints errors
+
+11  checkCmd.c: 
+    int checkCmd(const char * const cmdString, const char * const commands[]);
+    This function checks to see if the first token on the line passed
+    as cmdString is one of the bit commands defined for 
+     this lightboard controlling program listed in commands. 
+     Returns the index associated with that command 
+    (index of the command string in commands or -1 if there
+     was no match. Only lowercase commands will be accepted. 
+     
+ 
+
+Compile:
+Type make
+
+Run it:
+Type ./pa1 <file>
+or ./pa1
+
+
+Normal Output:
+> set 0x12345678 1 
+---* --*- --** -*-- -*-* -**- -*** *--- ---- ---- ---- ---- ---- ---- ---- ---* 
+> toggle 1 037 
+---* --*- --** -*-- -*-* -**- -*** *--* ---- ---- ---- ---- ---- ---- ---* ***- 
+ 
+> clear 0x20 10 
+---* --*- --** -*-- -*-* -**- -*-* *--* ---- ---- ---- ---- ---- ---- ---* -*-- 
+> shift 9 
+-**- *--- *-*- **-- *-** --*- ---- ---- ---- ---- ---- ---- --*- *--- ---- ---- 
+> shift -9 
+---- ---- --** -*-- -*-* -**- -*-* *--* ---- ---- ---- ---- ---- ---- ---* -*-- 
+> toggle -1 0xF0F0F0F0 
+**** **** **-- *-** *-*- *--* *-*- -**- **** ---- **** ---- **** ---- ***- -*-- 
+> rotate 8 
+**-- *-** *-*- *--* *-*- -**- **** ---- **** ---- **** ---- ***- -*-- **** **** 
+> rotate -8 
+**** **** **-- *-** *-*- *--* *-*- -**- **** ---- **** ---- **** ---- ***- -*-- 
+
+Abnormal output:
+Error messages, as printed out by any command. Example:
+
+set 1 
+ 
+ A 2nd argument is required for this command. 
+
+
+ 
+> clear 999999999999999999999999 3 
+ 
+ Converting "999999999999999999999999" base "0": Result too large 
+
+
+
+
+FAQs:
+1. backtrace followed by bt
+2. display/i $pc
+3. $
+4. V
+5. guu
+6. ls -a 
